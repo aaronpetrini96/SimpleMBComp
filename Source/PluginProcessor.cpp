@@ -226,7 +226,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SimpleMBCompAudioProcessor::
 
     layout.add(std::make_unique<AudioParameterChoice>(ParameterID ("Ratio",1), "Ratio",sa , 3));
     
-    layout.add(std::make_unique<AudioParameterBool)>(ParameterID("Bypassed",1),"Bypassed",false));
+    layout.add(std::make_unique<AudioParameterBool*>(ParameterID("Bypassed",1),"Bypassed",false));
 
     return layout;
 }
