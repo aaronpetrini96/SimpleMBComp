@@ -173,6 +173,11 @@ public:
 private:
 
     CompressorBand compressor;
+    
+    using Filter = juce::dsp::LinkwitzRileyFilter<float>;
+    Filter LP, HP;
+    
+    juce::AudioParameterFloat* lowCrossover {nullptr};
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMBCompAudioProcessor)
 };
