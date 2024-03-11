@@ -22,16 +22,36 @@ SimpleMBCompAudioProcessor::SimpleMBCompAudioProcessor()
                        )
 #endif
 {
-    compressor.attack = dynamic_cast<juce::AudioParameterFloat*>(apvts.getParameter("Attack"));
-    jassert(compressor.attack != nullptr);
-    compressor.release = dynamic_cast<juce::AudioParameterFloat*>(apvts.getParameter("Release"));
-    jassert(compressor.release != nullptr);
-    compressor.threshold = dynamic_cast<juce::AudioParameterFloat*>(apvts.getParameter("Threshold"));
-    jassert(compressor.threshold != nullptr);
-    compressor.ratio = dynamic_cast<juce::AudioParameterChoice*>(apvts.getParameter("Ratio"));
-    jassert(compressor.ratio != nullptr);
-    compressor.bypassed = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter("Bypassed"));
-    jassert(compressor.bypassed != nullptr);
+    
+    using namespace Params;
+    const auto& params = GetParams();
+    
+    auto floatHelper = [&apvts = this-> apvts, &params](auto& param, const auto& paramName)
+    {
+        param = dynamic_cast<juce::AudioParameterFloat*>(apvts.getParameter(params.at(paramName)));
+        jassert(param != nullptr);
+    };
+    
+    floatHelper(compressor.attack, Names::Attack_Low_Band);
+    floatHelper(compressor.release, Names::Release_Low_Band);
+    floatHelper(compressor.threshold, Names::Threshold_Low_Band);
+    
+    auto choiceHelper = [&apvts = this-> apvts, &params](auto& param, const auto& paramName)
+    {
+        param = dynamic_cast<juce::AudioParameterChoice*>(apvts.getParameter(params.at(paramName)));
+        jassert(param != nullptr);
+    };
+    
+    choiceHelper(compressor.ratio, Names::Ratio_Low_Band);
+    
+    auto boolHelper = [&apvts = this-> apvts, &params](auto& param, const auto& paramName)
+    {
+        param = dynamic_cast<juce::AudioParameterBool*>(apvts.getParameter(params.at(paramName)));
+        jassert(param != nullptr);
+    };
+    
+    boolHelper(compressor.bypassed, Names::Bypassed_Low_Band);
+    
     
 }
 
@@ -206,20 +226,23 @@ juce::AudioProcessorValueTreeState::ParameterLayout SimpleMBCompAudioProcessor::
     APVTS::ParameterLayout layout;
     
     using namespace juce;
+    using namespace Params;
+    const auto& params = GetParams();
     
-    layout.add(std::make_unique<AudioParameterFloat>(ParameterID ("Threshold",1), "Threshold", NormalisableRange<float> (-60,12,1,1),0));
+    layout.add(std::make_unique<AudioParameterFloat>(ParameterID (params.at(Names::Threshold_Low_Band),1), params.at(Names::Threshold_Low_Band), NormalisableRange<float> (-60,12,1,1),0));
     auto attackReleaseRange = NormalisableRange<float> (5, 500, 1,1);
-    layout.add(std::make_unique<AudioParameterFloat>(ParameterID ("Attack",1), "Attack", attackReleaseRange,30));
-    layout.add(std::make_unique<AudioParameterFloat>(ParameterID ("Release",1), "Release", attackReleaseRange,50));
+    layout.add(std::make_unique<AudioParameterFloat>(ParameterID (params.at(Names::Attack_Low_Band),1), params.at(Names::Attack_Low_Band), attackReleaseRange,30));
+    layout.add(std::make_unique<AudioParameterFloat>(ParameterID (params.at(Names::Release_Low_Band),1), params.at(Names::Release_Low_Band), attackReleaseRange,50));
 
     auto choices = std::vector<double>{1,2.5,2,3,4,5,6,7,8,10,15,20,50,100};
     juce::StringArray sa;
     for (auto choice: choices)
         sa.add(juce::String(choice, 1));
 
-    layout.add(std::make_unique<AudioParameterChoice>(ParameterID ("Ratio",1), "Ratio",sa , 3));
+    layout.add(std::make_unique<AudioParameterChoice>(ParameterID (params.at(Names::Ratio_Low_Band),1), params.at(Names::Ratio_Low_Band),sa , 3));
     
-    layout.add(std::make_unique<AudioParameterBool>(ParameterID("Bypassed",1),"Bypassed",false));
+    layout.add(std::make_unique<AudioParameterBool>(ParameterID(params.at(Names::Bypassed_Low_Band),1),
+                                                    params.at(Names::Bypassed_Low_Band),false));
 
     return layout;
 }
