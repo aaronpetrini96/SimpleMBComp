@@ -192,9 +192,9 @@ void SimpleMBCompAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
         buffer.clear (i, 0, buffer.getNumSamples());
     
   
-    compressor.updateCompressorSettings();
-    compressor.process(buffer);
-    
+//    compressor.updateCompressorSettings();
+//    compressor.process(buffer);
+//    
     for(auto& fb : filterBuffers)
         fb = buffer;
     
