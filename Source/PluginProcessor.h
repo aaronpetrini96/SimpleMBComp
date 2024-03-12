@@ -176,6 +176,9 @@ private:
     
     using Filter = juce::dsp::LinkwitzRileyFilter<float>;
     Filter LP, HP;
+    Filter AP;
+    
+    juce::AudioBuffer<float> apBuffer;
     
     juce::AudioParameterFloat* lowCrossover {nullptr};
     
