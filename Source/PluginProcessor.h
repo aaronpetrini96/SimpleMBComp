@@ -13,9 +13,9 @@
  _COMPLETED_ 1 how to split into 3 bands _COMPLETED_
  _COMPLETED_ 2 create parameters to control where the split happens _COMPLETED_
  _COMPLETED_ 3 prove that splitting produces no audible effects _COMPLETED_
- 4 create audio parameter for compressor bands, these need to live on each band instance
- 5 add 2 remaining compressors
- 6 add ability to mute/solo/bypass individual compressors
+ _COMPLETED_ 4 create audio parameter for compressor bands, these need to live on each band instance _COMPLETED_
+ _COMPLETED_ 5 add 2 remaining compressors _COMPLETED_
+ _COMPLETED_ 6 add ability to mute/solo/bypass individual compressors  _COMPLETED_
  7 add input and output gain to offset changes in output level
  8 clean up anything that needs cleaning
  */
@@ -47,7 +47,15 @@ enum Names
         
         Bypassed_Low_Band,
         Bypassed_Mid_Band,
-        Bypassed_High_Band
+        Bypassed_High_Band,
+    
+        Mute_Low_Band,
+        Mute_Mid_Band,
+        Mute_High_Band,
+        
+        Solo_Low_Band,
+        Solo_Mid_Band,
+        Solo_High_Band,
         
     };
 
@@ -77,6 +85,14 @@ inline const std::map<Names, juce::String>& GetParams()
         {Bypassed_Low_Band, "Bypass Low Band"},
         {Bypassed_Mid_Band,"Bypass Mid Band"},
         {Bypassed_High_Band, "Bypass High Band"},
+        
+        {Mute_Low_Band,  "Mute Low Band"},
+        {Mute_Mid_Band,  "Mute Mid Band"},
+        {Mute_High_Band, "Mute High Band"},
+        
+        {Solo_Low_Band,  "Solo Low Band"},
+        {Solo_Mid_Band,  "Solo Mid Band"},
+        {Solo_High_Band, "Solo High Band"},
     };
     
     return params;
@@ -87,11 +103,13 @@ inline const std::map<Names, juce::String>& GetParams()
 
 struct CompressorBand
 {
-    juce::AudioParameterFloat* attack{nullptr};
-    juce::AudioParameterFloat* release{nullptr};
-    juce::AudioParameterFloat* threshold{nullptr};
-    juce::AudioParameterChoice* ratio{nullptr};
-    juce::AudioParameterBool* bypassed{nullptr};
+    juce::AudioParameterFloat* attack {nullptr};
+    juce::AudioParameterFloat* release {nullptr};
+    juce::AudioParameterFloat* threshold {nullptr};
+    juce::AudioParameterChoice* ratio {nullptr};
+    juce::AudioParameterBool* bypassed {nullptr};
+    juce::AudioParameterBool* mute {nullptr};
+    juce::AudioParameterBool* solo {nullptr};
     
     void prepare(const juce::dsp::ProcessSpec& spec)
     {
