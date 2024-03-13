@@ -10,9 +10,9 @@
 
 /*
  DSP ROADMAP
- 1 how to split into 3 bands
- 2 create parameters to control where the split happens
- 3 prove that splitting produces no audible effects
+ _COMPLETED_ 1 how to split into 3 bands _COMPLETED_
+ _COMPLETED_ 2 create parameters to control where the split happens _COMPLETED_
+ _COMPLETED_ 3 prove that splitting produces no audible effects _COMPLETED_
  4 create audio parameter for compressor bands, these need to live on each band instance
  5 add 2 remaining compressors
  6 add ability to mute/solo/bypass individual compressors
@@ -172,7 +172,10 @@ public:
 
 private:
 
-    CompressorBand compressor;
+    std::array<CompressorBand,3> compressors;
+    CompressorBand& lowBandComp = compressors[0];
+    CompressorBand& midBandComp = compressors[1];
+    CompressorBand& highBandComp = compressors[2];
     
     using Filter = juce::dsp::LinkwitzRileyFilter<float>;
     //      FC0  FC1
