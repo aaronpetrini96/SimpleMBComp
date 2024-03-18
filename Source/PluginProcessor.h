@@ -16,8 +16,8 @@
  _COMPLETED_ 4 create audio parameter for compressor bands, these need to live on each band instance _COMPLETED_
  _COMPLETED_ 5 add 2 remaining compressors _COMPLETED_
  _COMPLETED_ 6 add ability to mute/solo/bypass individual compressors  _COMPLETED_
- 7 add input and output gain to offset changes in output level
- 8 clean up anything that needs cleaning
+ _COMPLETED_ 7 add input and output gain to offset changes in output level _COMPLETED_
+ _COMPLETED_ 8 clean up anything that needs cleaning _COMPLETED_
  */
 
 #include <JuceHeader.h>
@@ -56,6 +56,9 @@ enum Names
         Solo_Low_Band,
         Solo_Mid_Band,
         Solo_High_Band,
+    
+        Gain_In,
+        Gain_Out,
         
     };
 
@@ -93,6 +96,8 @@ inline const std::map<Names, juce::String>& GetParams()
         {Solo_Low_Band,  "Solo Low Band"},
         {Solo_Mid_Band,  "Solo Mid Band"},
         {Solo_High_Band, "Solo High Band"},
+        {Gain_In,"Gain In"},
+        {Gain_Out,  "Gain Out"},
     };
     
     return params;
@@ -200,16 +205,28 @@ private:
     Filter  LP1 , AP2,
             HP1, LP2,
                  HP2;
-    
-//    Filter invAP1, invAP2;
-//    juce::AudioBuffer<float> invAPBuffer;
-    
+
     juce::AudioBuffer<float> apBuffer;
     
     juce::AudioParameterFloat* lowMidCrossover {nullptr};
     juce::AudioParameterFloat* midHighCrossover {nullptr};
     
     std::array<juce::AudioBuffer<float>,3> filterBuffers;
+    
+    juce::dsp::Gain<float> inputGain, outputGain;
+    juce::AudioParameterFloat* inputGainParam {nullptr};
+    juce::AudioParameterFloat* outputGainParam {nullptr};
+    
+    template<typename T, typename U>
+    void applyGain(T& buffer, U& gain)
+    {
+        auto block = juce::dsp::AudioBlock<float>(buffer);
+        auto ctx = juce::dsp::ProcessContextReplacing<float>(block);
+        gain.process(ctx);
+    }
+    
+    void updateState();
+    void splitBands(const juce::AudioBuffer<float>& inputBuffer);
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMBCompAudioProcessor)
 };
