@@ -228,14 +228,15 @@ GlobalControls::GlobalControls(juce::AudioProcessorValueTreeState& apvts)
     using namespace Params;
     const auto& params = GetParams();
     
-    auto makeAttachmentHelper = [&params, &apvts] (auto& attachment, const auto& name, auto &slider)
+    auto makeAttachmentHelper = [&params, &apvts] (auto& attachment, const auto name, auto& slider)
     {
-        makeAttachment(attachment, &apvts, params, name, slider);
+        makeAttachment(attachment, apvts, params, name, slider);
     };
+    
     
     makeAttachmentHelper(inGainSliderAttachment, Names::Gain_In, inGainSalider);
     makeAttachmentHelper(lowmidXoverSliderAttachment, Names::Low_Mid_Crossover_Freq, lowMidXoverSlider);
-    makeAttachmentHelper(midHighXoverSlider, Names::Mid_High_Crossover_Freq, midHighXoverSlider);
+    makeAttachmentHelper(midHighXoverSliderAttachment, Names::Mid_High_Crossover_Freq, midHighXoverSlider);
     makeAttachmentHelper(outGainSliderAttachment, Names::Gain_Out, outGainSlider);
     
     addAndMakeVisible(inGainSalider);

@@ -73,7 +73,7 @@ inline const std::map<Names, juce::String>& GetParams()
     static std::map<Names, juce::String> params =
     {
         {Low_Mid_Crossover_Freq, "Low_Mid Crossover Freq"},
-        {Mid_High_Crossover_Freq,"Mid_High Crossover Freq"},
+        {Mid_High_Crossover_Freq, "Mid_High Crossover Freq"},
         
         {Threshold_Low_Band,"Threshold Low Band"},
         {Threshold_Mid_Band,"Threshold Mid Band"},
