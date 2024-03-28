@@ -410,7 +410,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SimpleMBCompAudioProcessor::
     layout.add(std::make_unique<AudioParameterFloat>(ParameterID (params.at(Names::Release_High_Band),1),
                                                      params.at(Names::Release_High_Band), attackReleaseRange,50));
 
-    auto choices = std::vector<double>{1,2.5,2,3,4,5,6,7,8,10,15,20,50,100};
+    auto choices = std::vector<double>{1,1.4,2,3,4,5,6,7,8,10,15,20,50,100};
     juce::StringArray sa;
     for (auto choice: choices)
         sa.add(juce::String(choice, 1));
