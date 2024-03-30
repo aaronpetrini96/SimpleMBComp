@@ -162,7 +162,7 @@ void addLabelPairs(Labels& labels, const ParamsType& param, const SuffixType& su
     labels.add({1.f,getValString(param,false,suffix)});
 }
 
-struct CompressorBandControls : juce::Component
+struct CompressorBandControls : juce::Component, juce::Button::Listener
 {
 private:
     juce::AudioProcessorValueTreeState& apvts;
@@ -187,11 +187,18 @@ private:
     juce::Component::SafePointer<CompressorBandControls> safePtr {this};
     
     void updateAttachments();
+    void updateSliderEnablements();
+    void updateSoloMuteBypassToggleStates(juce::Button& clickedButton);
   
 public:
     CompressorBandControls(juce::AudioProcessorValueTreeState& apvts);
     void paint(juce::Graphics& g) override;
     void resized() override;
+    
+    void buttonClicked(juce::Button* button) override;
+    
+    
+    ~CompressorBandControls() override;
     
 };
 

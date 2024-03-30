@@ -308,6 +308,10 @@ ratioSlider(nullptr, "")
     addAndMakeVisible(thresholdSlider);
     addAndMakeVisible(ratioSlider);
     
+    bypassButton.addListener(this);
+    soloButton.addListener(this);
+    muteButton.addListener(this);
+    
     bypassButton.setName("X");
     soloButton.setName("S");
     muteButton.setName("M");
@@ -344,6 +348,13 @@ ratioSlider(nullptr, "")
     addAndMakeVisible(lowBand);
     addAndMakeVisible(midBand);
     addAndMakeVisible(highBand);
+}
+
+CompressorBandControls::~CompressorBandControls()
+{
+    bypassButton.removeListener(this);
+    soloButton.removeListener(this);
+    muteButton.removeListener(this);
 }
 
 void CompressorBandControls::resized()
@@ -421,6 +432,42 @@ void CompressorBandControls::paint(juce::Graphics& g)
     auto bounds = getLocalBounds();
 
     drawModuleBackground(g, bounds);
+}
+
+void CompressorBandControls::buttonClicked(juce::Button *button)
+{
+    updateSliderEnablements();
+    updateSoloMuteBypassToggleStates(*button);
+}
+
+void CompressorBandControls::updateSoloMuteBypassToggleStates(juce::Button& clickedButton)
+{
+    if(&clickedButton == &soloButton && soloButton.getToggleState())
+    {
+        bypassButton.setToggleState(false, juce::NotificationType::sendNotification);
+        muteButton.setToggleState(false, juce::NotificationType::sendNotification);
+    }
+    
+    if(&clickedButton == &bypassButton && bypassButton.getToggleState())
+    {
+        soloButton.setToggleState(false, juce::NotificationType::sendNotification);
+        muteButton.setToggleState(false, juce::NotificationType::sendNotification);
+    }
+    
+    if(&clickedButton == &muteButton && muteButton.getToggleState())
+    {
+        soloButton.setToggleState(false, juce::NotificationType::sendNotification);
+        bypassButton.setToggleState(false, juce::NotificationType::sendNotification);
+    }
+}
+
+void CompressorBandControls::updateSliderEnablements()
+{
+    auto disabled = muteButton.getToggleState() || bypassButton.getToggleState();
+    attackSlider.setEnabled(!disabled);
+    releaseSlider.setEnabled(!disabled);
+    thresholdSlider.setEnabled(!disabled);
+    ratioSlider.setEnabled(!disabled);
 }
 
 void CompressorBandControls::updateAttachments()
