@@ -358,7 +358,7 @@ ratioSlider(nullptr, "")
     
     lowBand.setName("Low");
     midBand.setName("Mid");
-    highBand.setName("Band");
+    highBand.setName("High");
     
     lowBand.setRadioGroupId(1);
     midBand.setRadioGroupId(1);
