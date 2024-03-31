@@ -10,11 +10,11 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
-#include "GlobalControls.h"
-#include "CompressorBandControls.h"
-#include "LookAndFeel.h"
-#include "Utilities.h"
-#include "UtilityComponents.h"
+#include "GUI/GlobalControls.h"
+#include "GUI/CompressorBandControls.h"
+#include "GUI/LookAndFeel.h"
+#include "GUI/Utilities.h"
+#include "GUI/UtilityComponents.h"
 
 //==============================================================================
 

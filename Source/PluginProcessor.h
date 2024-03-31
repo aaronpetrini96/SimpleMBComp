@@ -27,8 +27,8 @@
  */
 
 #include <JuceHeader.h>
-#include "Params.h"
-#include "CompressorBand.h"
+#include "DSP/Params.h"
+#include "DSP/CompressorBand.h"
 //==============================================================================
 /**
 */

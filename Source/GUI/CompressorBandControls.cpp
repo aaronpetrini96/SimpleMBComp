@@ -9,9 +9,9 @@
 */
 
 #include "CompressorBandControls.h"
-#include "Params.h"
+#include "../DSP/Params.h"
 #include "Utilities.h"
-//#include "UtilityComponents.h"
+
 
 
 CompressorBandControls::CompressorBandControls(juce::AudioProcessorValueTreeState& apv) :
