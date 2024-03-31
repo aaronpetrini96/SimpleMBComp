@@ -9,6 +9,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+
 //==============================================================================
 SimpleMBCompAudioProcessor::SimpleMBCompAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations

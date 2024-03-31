@@ -4,6 +4,35 @@
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Aaron Petrini">
   <MAINGROUP id="KsPUst" name="SimpleMBComp">
     <GROUP id="{E054E016-11AD-AC15-0208-D077DC17B53C}" name="Source">
+      <FILE id="xFtlR2" name="CompressorBand.cpp" compile="1" resource="0"
+            file="Source/CompressorBand.cpp"/>
+      <FILE id="Hj33nE" name="CompressorBand.h" compile="0" resource="0"
+            file="Source/CompressorBand.h"/>
+      <FILE id="XKNyL2" name="Params.cpp" compile="1" resource="0" file="Source/Params.cpp"/>
+      <FILE id="eQHmaS" name="Params.h" compile="0" resource="0" file="Source/Params.h"/>
+      <FILE id="e63fAg" name="GlobalControls.cpp" compile="1" resource="0"
+            file="Source/GlobalControls.cpp"/>
+      <FILE id="kVTapu" name="GlobalControls.h" compile="0" resource="0"
+            file="Source/GlobalControls.h"/>
+      <FILE id="PrAH9x" name="CompressorBandControls.cpp" compile="1" resource="0"
+            file="Source/CompressorBandControls.cpp"/>
+      <FILE id="vzXcI8" name="CompressorBandControls.h" compile="0" resource="0"
+            file="Source/CompressorBandControls.h"/>
+      <FILE id="YJ9lrj" name="Utilities.cpp" compile="1" resource="0" file="Source/Utilities.cpp"/>
+      <FILE id="qNdtvv" name="Utilities.h" compile="0" resource="0" file="Source/Utilities.h"/>
+      <FILE id="yGEnuP" name="UtilityComponents.cpp" compile="1" resource="0"
+            file="Source/UtilityComponents.cpp"/>
+      <FILE id="iKqf8r" name="UtilityComponents.h" compile="0" resource="0"
+            file="Source/UtilityComponents.h"/>
+      <FILE id="LwscqN" name="CustomButtons.cpp" compile="1" resource="0"
+            file="Source/CustomButtons.cpp"/>
+      <FILE id="lJqda1" name="CustomButtons.h" compile="0" resource="0" file="Source/CustomButtons.h"/>
+      <FILE id="wRFNwo" name="RotarySliderWithLabels.cpp" compile="1" resource="0"
+            file="Source/RotarySliderWithLabels.cpp"/>
+      <FILE id="Ds8AnB" name="RotarySliderWithLabels.h" compile="0" resource="0"
+            file="Source/RotarySliderWithLabels.h"/>
+      <FILE id="OL7568" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/LookAndFeel.cpp"/>
+      <FILE id="YASeFA" name="LookAndFeel.h" compile="0" resource="0" file="Source/LookAndFeel.h"/>
       <FILE id="E7pgN6" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="XdoSkG" name="PluginProcessor.h" compile="0" resource="0"
