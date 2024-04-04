@@ -184,6 +184,9 @@ void SimpleMBCompAudioProcessor::prepareToPlay (double sampleRate, int samplesPe
     
     for (auto& buffer : filterBuffers)
         buffer.setSize(spec.numChannels, samplesPerBlock);
+    
+    leftChannelFifo.prepare(samplesPerBlock);
+    rightChannelFifo.prepare(samplesPerBlock);
 
 }
 
@@ -272,6 +275,9 @@ void SimpleMBCompAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     
 
     updateState();
+    
+    leftChannelFifo.update(buffer);
+    rightChannelFifo.update(buffer);
     
     applyGain(buffer,inputGain);
 
