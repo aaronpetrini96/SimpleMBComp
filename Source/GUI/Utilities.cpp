@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    Utilities.cpp
-    Created: 31 Mar 2024 5:52:05pm
-    Author:  Aaron Petrini
-
-  ==============================================================================
-*/
-
 #include "Utilities.h"
 
 
@@ -29,7 +19,7 @@ juce::String getValString(const juce::RangedAudioParameter& param, bool getLow, 
 }
 
 
-void drawModuleBackground(juce::Graphics& g, juce::Rectangle<int> bounds)
+juce::Rectangle<int> drawModuleBackground(juce::Graphics& g, juce::Rectangle<int> bounds)
 {
     using namespace juce;
         
@@ -43,4 +33,6 @@ void drawModuleBackground(juce::Graphics& g, juce::Rectangle<int> bounds)
     g.fillRoundedRectangle(bounds.toFloat(),3);
     
     g.drawRect(localBounds);
+    
+    return bounds;
 }
