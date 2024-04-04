@@ -187,6 +187,14 @@ void SimpleMBCompAudioProcessor::prepareToPlay (double sampleRate, int samplesPe
     
     leftChannelFifo.prepare(samplesPerBlock);
     rightChannelFifo.prepare(samplesPerBlock);
+    
+    osc.initialise([](float x){return std::sin(x);});
+    osc.prepare(spec);
+//    osc.setFrequency(50);
+    osc.setFrequency((getSampleRate()/(2<<FFTOrder::order2048)-1)*50);
+    
+    gain.prepare(spec);
+    gain.setGainDecibels(-12.f);
 
 }
 
@@ -272,9 +280,16 @@ void SimpleMBCompAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
 
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-    
 
     updateState();
+    
+    if (true) {
+        buffer.clear();
+        auto block = juce::dsp::AudioBlock<float> (buffer);
+        auto ctx = juce::dsp::ProcessContextReplacing<float>(block);
+        osc.process(ctx);
+        gain.process(ctx);
+    }
     
     leftChannelFifo.update(buffer);
     rightChannelFifo.update(buffer);
