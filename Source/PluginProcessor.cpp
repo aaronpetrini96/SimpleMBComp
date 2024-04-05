@@ -283,14 +283,14 @@ void SimpleMBCompAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
 
     updateState();
     
-    if (false) {
-        buffer.clear();
-        auto block = juce::dsp::AudioBlock<float> (buffer);
-        auto ctx = juce::dsp::ProcessContextReplacing<float>(block);
-        osc.process(ctx);
-        gain.process(ctx);
-    }
-    
+//    if (false) {
+//        buffer.clear();
+//        auto block = juce::dsp::AudioBlock<float> (buffer);
+//        auto ctx = juce::dsp::ProcessContextReplacing<float>(block);
+//        osc.process(ctx);
+//        gain.process(ctx);
+//    }
+//
     leftChannelFifo.update(buffer);
     rightChannelFifo.update(buffer);
     
