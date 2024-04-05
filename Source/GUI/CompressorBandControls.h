@@ -53,6 +53,8 @@ public:
     
     void buttonClicked(juce::Button* button) override;
     
+    void toggleAllBands(bool shouldBeBypassed);
+    
     
     ~CompressorBandControls() override;
     
