@@ -44,7 +44,7 @@ private:
         int numSamples = static_cast<int>(buffer.getNumSamples());
         auto rms = 0.f;
         for (int chan = 0; chan< numChannels; ++chan)
-            rms =+ buffer.getRMSLevel(chan,0,numSamples);
+            rms += buffer.getRMSLevel(chan,0,numSamples);
         rms/= static_cast<float>(numChannels);
         return rms;
     }
