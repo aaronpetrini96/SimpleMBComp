@@ -11,6 +11,12 @@
 #pragma once
 #include <JuceHeader.h>
 
+#define MIN_FREQ 20.f
+#define MAX_FREQ 20000.f
+#define NEGATIVE_INFINITY -72.f
+#define MAX_DECIBELS 12.f
+#define MIN_THRESHOLD -60.f
+
 enum FFTOrder
 {
     order2048 = 11,

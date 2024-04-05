@@ -401,7 +401,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SimpleMBCompAudioProcessor::
     
     //THRESHOLD
     
-    auto thresholdRange = NormalisableRange<float> (-60,12,1,1);
+    auto thresholdRange = NormalisableRange<float> (MIN_THRESHOLD,MAX_DECIBELS,1,1);
     layout.add(std::make_unique<AudioParameterFloat>(ParameterID(params.at(Names::Threshold_Low_Band),1),
                                                      params.at(Names::Threshold_Low_Band),
                                                      thresholdRange,0));
